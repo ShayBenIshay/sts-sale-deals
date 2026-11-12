@@ -35,6 +35,11 @@ class STS_Sale_Deals {
 		if ( apply_filters( 'sts_sale_deals_auto_single', true ) ) {
 			add_action( 'woocommerce_before_single_product_summary', array( $this, 'render_single_badge' ), 25 );
 		}
+		// "More of this sale" button after add to cart. Themes that bypass the hook call
+		// sts_sale_deals_more_button_html() instead.
+		if ( apply_filters( 'sts_sale_deals_auto_more_button', true ) ) {
+			add_action( 'woocommerce_single_product_summary', array( $this, 'render_more_button' ), 35 );
+		}
 	}
 
 	public function register_taxonomy() {
@@ -151,6 +156,64 @@ class STS_Sale_Deals {
 		}
 
 		return apply_filters( 'sts_sale_deals_badge_html', $html, $term, $product );
+	}
+
+	/**
+	 * Button linking to the product's deal page. Empty when the product is in no deal,
+	 * or the deal has no other published product to show.
+	 */
+	public function get_more_button_html( $product = null ) {
+		if ( null === $product ) {
+			global $product;
+		}
+		$term = $this->get_product_deal( $product );
+		if ( ! $term ) {
+			return '';
+		}
+		$product = wc_get_product( $product );
+		$id      = $product->is_type( 'variation' ) ? $product->get_parent_id() : $product->get_id();
+
+		$others = get_posts(
+			array(
+				'post_type'      => 'product',
+				'post_status'    => 'publish',
+				'post__not_in'   => array( $id ),
+				'posts_per_page' => 1,
+				'fields'         => 'ids',
+				'no_found_rows'  => true,
+				'tax_query'      => array(
+					array(
+						'taxonomy' => self::TAXONOMY,
+						'field'    => 'term_id',
+						'terms'    => $term->term_id,
+					),
+				),
+			)
+		);
+		if ( empty( $others ) ) {
+			return '';
+		}
+
+		$link = get_term_link( $term );
+		if ( is_wp_error( $link ) ) {
+			return '';
+		}
+
+		$text = apply_filters( 'sts_sale_deals_more_button_text', 'לעוד מוצרים שמשתתפים במבצע', $term, $product );
+		$html = sprintf(
+			'<a class="sts-deal-more button" dir="auto" href="%s">%s</a>',
+			esc_url( $link ),
+			esc_html( $text )
+		);
+
+		return apply_filters( 'sts_sale_deals_more_button_html', $html, $term, $product );
+	}
+
+	public function render_more_button() {
+		$html = $this->get_more_button_html();
+		if ( '' !== $html ) {
+			echo '<div class="sts-deal-more-wrap">' . $html . '</div>'; // phpcs:ignore WordPress.Security.EscapeOutput -- escaped in get_more_button_html().
+		}
 	}
 
 	public function render_loop_badge() {

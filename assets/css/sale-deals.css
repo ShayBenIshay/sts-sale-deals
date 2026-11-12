@@ -81,6 +81,16 @@
 	}
 }
 
+/* "More of this sale" button on the single product page */
+.sts-deal-more-wrap {
+	margin: 1rem 0;
+}
+
+.sts-deal-more {
+	display: inline-block;
+	text-decoration: none;
+}
+
 /* Sales page + per-deal pages (generic template) */
 .sts-deals-wrap {
 	max-width: 1200px;

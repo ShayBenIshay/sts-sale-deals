@@ -17,7 +17,7 @@ Sale deals as a WooCommerce product taxonomy (`sts_deal`), with a label design p
 - Deal pages are public and indexable. After updating from 0.1.x the rewrite rules are flushed once automatically.
 
 ## Themes that bypass the loop hooks
-If the theme overrides `content-product.php` and never fires `woocommerce_before_shop_loop_item_title`, echo `sts_sale_deals_badge_html( $product )` inside the image wrapper. Disable the automatic hooks with the filters `sts_sale_deals_auto_loop` / `sts_sale_deals_auto_single` (return `false`).
+If the theme overrides `content-product.php` and never fires `woocommerce_before_shop_loop_item_title`, echo `sts_sale_deals_badge_html( $product )` inside the image wrapper. On a single product page in a deal, a button (default text `לעוד מוצרים שמשתתפים במבצע`) links to the deal's page; it is hidden when the deal has no other published product. It is added after add to cart; a theme that bypasses that hook echoes `sts_sale_deals_more_button_html( $product )`. Change the text with the `sts_sale_deals_more_button_text` filter, or disable it with `sts_sale_deals_auto_more_button` (return `false`). Disable the automatic hooks with the filters `sts_sale_deals_auto_loop` / `sts_sale_deals_auto_single` (return `false`).
 
 ## Requirements
 WordPress 5.0+, WooCommerce 5.0+, PHP 7.4+.

@@ -3,7 +3,7 @@
  * Plugin Name: STS Sale Deals
  * Plugin URI: https://shaytechsolutions.com
  * Description: Create sale deals as a product taxonomy, design a label per deal, show it on products, and get a Sales page with a page per deal. The same deal can drive Discount Rules PRO.
- * Version: 0.2.0
+ * Version: 0.3.0
  * Author: Shay Tech Solutions
  * Author URI: https://shaytechsolutions.com
  * License: GPL-2.0-or-later
@@ -26,7 +26,7 @@ add_action( 'before_woocommerce_init', function() {
 	}
 } );
 
-define( 'STS_SD_VERSION', '0.2.0' );
+define( 'STS_SD_VERSION', '0.3.0' );
 define( 'STS_SD_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'STS_SD_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
@@ -49,4 +49,15 @@ register_activation_hook( __FILE__, array( 'STS_Sale_Deals_Pages', 'activate' ) 
  */
 function sts_sale_deals_badge_html( $product = null ) {
 	return STS_Sale_Deals::get_instance()->get_badge_html( $product );
+}
+
+/**
+ * Template helper: "more of this sale" button for a product, or '' when it is in no deal
+ * or the deal has no other published product.
+ *
+ * @param WC_Product|int|null $product Product (defaults to the global product).
+ * @return string
+ */
+function sts_sale_deals_more_button_html( $product = null ) {
+	return STS_Sale_Deals::get_instance()->get_more_button_html( $product );
 }
