@@ -1,0 +1,82 @@
+.sts-deal-badge {
+	position: absolute;
+	top: 0.5rem;
+	right: 0.5rem;
+	z-index: 4;
+	display: inline-flex;
+	align-items: center;
+	gap: 0.35rem;
+	padding: 0.35rem 0.7rem;
+	border: none;
+	font-size: 0.85rem;
+	font-weight: 700;
+	line-height: 1.15;
+	border-radius: 999px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.22);
+	white-space: nowrap;
+	/* Let clicks fall through to the surrounding product-card link. */
+	pointer-events: none;
+}
+
+.sts-deal-badge .sts-deal-badge__text {
+	color: inherit;
+}
+
+.sts-deal-badge__icon {
+	flex-shrink: 0;
+}
+
+.sts-deal-badge--image {
+	padding: 0;
+	background: none !important;
+	box-shadow: none;
+	border-radius: 0;
+}
+
+.sts-deal-badge__img {
+	display: block;
+	width: 72px;
+	height: auto;
+}
+
+/* Single product: the wrapper anchors the badge over the gallery. */
+.sts-deal-gallery-wrapper {
+	position: absolute;
+	top: 0.9rem;
+	right: 0.9rem;
+	z-index: 6;
+	pointer-events: none;
+}
+
+.sts-deal-gallery-wrapper .sts-deal-badge {
+	position: static;
+	font-size: 0.95rem;
+	padding: 0.45rem 0.9rem;
+}
+
+.sts-deal-gallery-wrapper .sts-deal-badge--image {
+	padding: 0;
+}
+
+.sts-deal-gallery-wrapper .sts-deal-badge__img {
+	width: 96px;
+}
+
+@media (max-width: 767px) {
+	.sts-deal-badge {
+		top: 0.4rem;
+		right: 0.4rem;
+		font-size: 0.75rem;
+		padding: 0.3rem 0.55rem;
+	}
+
+	.sts-deal-gallery-wrapper {
+		top: 0.6rem;
+		right: 0.6rem;
+	}
+
+	.sts-deal-gallery-wrapper .sts-deal-badge {
+		font-size: 0.85rem;
+		padding: 0.35rem 0.7rem;
+	}
+}
