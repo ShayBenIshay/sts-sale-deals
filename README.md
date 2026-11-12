@@ -16,6 +16,6 @@ If the theme overrides `content-product.php` and never fires `woocommerce_before
 WordPress 5.0+, WooCommerce 5.0+, PHP 7.4+.
 
 ## Status
-Version 0.1.0 (slice 1: deals + labels). The Sales page and sub-pages are planned. Provided as-is, under GPL-2.0-or-later (see `LICENSE`).
+Version 0.1.1 (slice 1: deals + labels). The Sales page and sub-pages are planned. Provided as-is, under GPL-2.0-or-later (see `LICENSE`).
 
 Setup, customization and support are available from [Shay Tech Solutions](https://shaytechsolutions.com).

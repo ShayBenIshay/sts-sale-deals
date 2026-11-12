@@ -126,7 +126,7 @@ class STS_Sale_Deals {
 				$icon = '<svg class="sts-deal-badge__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>';
 			}
 			$html = sprintf(
-				'<span class="sts-deal-badge" data-deal="%1$s" role="img" aria-label="%2$s" style="background:%3$s;color:%4$s">%5$s<span class="sts-deal-badge__text">%2$s</span></span>',
+				'<span class="sts-deal-badge" dir="auto" data-deal="%1$s" role="img" aria-label="%2$s" style="background:%3$s;color:%4$s">%5$s<span class="sts-deal-badge__text">%2$s</span></span>',
 				esc_attr( $term->slug ),
 				esc_attr( $s['text'] ),
 				esc_attr( $s['bg'] ),
