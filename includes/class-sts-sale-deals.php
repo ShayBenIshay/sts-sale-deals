@@ -11,6 +11,9 @@ class STS_Sale_Deals {
 
 	const TAXONOMY = 'sts_deal';
 
+	/** URL base: /sales (all deals) and /sales/<deal-slug>. */
+	const BASE = 'sales';
+
 	private static $instance = null;
 
 	public static function get_instance() {
@@ -52,16 +55,20 @@ class STS_Sale_Deals {
 					'search_items'  => __( 'Search deals', 'sts-sale-deals' ),
 					'not_found'     => __( 'No deals found', 'sts-sale-deals' ),
 				),
-				'public'             => false,
-				'publicly_queryable' => false,
+				'public'             => true,
+				'publicly_queryable' => true,
 				'show_ui'            => true,
 				'show_in_menu'       => true,
-				'show_in_nav_menus'  => false,
+				'show_in_nav_menus'  => true,
 				'show_admin_column'  => true,
 				'show_in_quick_edit' => true,
 				'show_in_rest'       => true,
 				'hierarchical'       => true,
-				'rewrite'            => false,
+				'rewrite'            => array(
+					'slug'         => self::BASE,
+					'with_front'   => false,
+					'hierarchical' => false,
+				),
 				'query_var'          => false,
 			)
 		);
@@ -87,6 +94,14 @@ class STS_Sale_Deals {
 			'icon'  => '' === $icon ? true : (bool) $icon,
 			'image' => (int) get_term_meta( $term->term_id, 'sts_label_image', true ),
 		);
+	}
+
+	/**
+	 * Name shown to shoppers (chips, page title): the label text, falling back to the term name.
+	 */
+	public static function get_display_name( $term ) {
+		$text = (string) get_term_meta( $term->term_id, 'sts_label_text', true );
+		return '' !== $text ? $text : $term->name;
 	}
 
 	/**

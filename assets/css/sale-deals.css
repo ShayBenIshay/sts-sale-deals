@@ -80,3 +80,54 @@
 		padding: 0.35rem 0.7rem;
 	}
 }
+
+/* Sales page + per-deal pages (generic template) */
+.sts-deals-wrap {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 2rem 1rem;
+}
+
+.sts-deals-title {
+	text-align: center;
+	margin-bottom: 1rem;
+}
+
+.sts-deals-chips {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 0.5rem;
+	margin-bottom: 1.5rem;
+}
+
+.sts-deals-chip {
+	display: inline-block;
+	padding: 0.4rem 1rem;
+	border: 1px solid currentColor;
+	border-radius: 999px;
+	text-decoration: none;
+	font-weight: 600;
+}
+
+.sts-deals-chip.is-active {
+	background: #2a8c8d;
+	border-color: #2a8c8d;
+	color: #fff;
+}
+
+.sts-deals-description,
+.sts-deals-empty {
+	text-align: center;
+	margin-bottom: 1.5rem;
+}
+
+/* Fallback grid in case the theme/WooCommerce does not style ul.products here. */
+.sts-deals-wrap ul.products {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+	gap: 2rem;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
