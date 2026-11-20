@@ -110,7 +110,9 @@ class STS_Sale_Deals {
 	}
 
 	/**
-	 * The deal for a product: the first term by term id (variations use the parent).
+	 * The deal for a product: the first leaf term by term id (variations use the parent).
+	 * Group terms (deals with sub-deals, e.g. Cats) never label a product; a product
+	 * ticked only on a group has no deal.
 	 *
 	 * @return WP_Term|null
 	 */
@@ -124,6 +126,17 @@ class STS_Sale_Deals {
 		// whereas wp_get_object_terms() ran one database query per product card.
 		$terms = get_the_terms( $id, self::TAXONOMY );
 		if ( is_wp_error( $terms ) || empty( $terms ) ) {
+			return null;
+		}
+		$terms = array_values(
+			array_filter(
+				$terms,
+				function ( $t ) {
+					return ! get_term_children( $t->term_id, self::TAXONOMY );
+				}
+			)
+		);
+		if ( empty( $terms ) ) {
 			return null;
 		}
 		usort(
