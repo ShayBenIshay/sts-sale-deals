@@ -2,19 +2,28 @@
 	$( function () {
 		$( '.sts-sd-color' ).wpColorPicker();
 
-		// No parent = a group, which carries no label: hide the label design fields (their values stay in the form).
+		// "Design a label" checkbox: off by default for a group (no parent), on for a deal inside one.
+		// Choosing a parent ticks it, choosing none clears it; either way it can be changed by hand.
+		// Hidden fields still submit, so saved label settings are never lost.
 		var $parent = $( '#parent' );
-		function syncGroupFields() {
+		var $toggle = $( '#sts_label_toggle' );
+		function hasParent() {
 			var v = String( $parent.val() );
-			var isGroup = ! $parent.length || v === '-1' || v === '0';
-			$( '.sts-sd-badge-fields' ).toggle( ! isGroup );
-			$( '.sts-sd-group-note' ).toggle( isGroup );
+			return $parent.length && v !== '-1' && v !== '0';
 		}
+		function applyLabelFields() {
+			$( '.sts-sd-badge-fields' ).toggle( $toggle.is( ':checked' ) );
+		}
+		function syncGroupFields() {
+			$toggle.prop( 'checked', hasParent() );
+			applyLabelFields();
+		}
+		$toggle.on( 'change', applyLabelFields );
+		applyLabelFields();
 		if ( window.stsSaleDeals && stsSaleDeals.parentHint ) {
 			$( '#parent-description' ).text( stsSaleDeals.parentHint );
 		}
 		$parent.on( 'change', syncGroupFields );
-		syncGroupFields();
 
 		var frame;
 		$( '#sts_label_image_pick' ).on( 'click', function ( e ) {

@@ -184,7 +184,13 @@ class STS_Sale_Deals_Admin {
 		$image_url = $s['image'] ? wp_get_attachment_image_url( $s['image'], 'thumbnail' ) : '';
 		wp_nonce_field( 'sts_sd_save_term', 'sts_sd_nonce' );
 		?>
-		<p class="sts-sd-group-note description"><?php esc_html_e( 'A group has no label on products. To design a label, choose a group above and create a deal inside it.', 'sts-sale-deals' ); ?></p>
+		<div class="sts-sd-field">
+			<label>
+				<input type="checkbox" id="sts_label_toggle" <?php checked( ! empty( $s['show_label'] ) ); ?>>
+				<?php esc_html_e( 'Design a label for this deal', 'sts-sale-deals' ); ?>
+			</label>
+			<p class="description"><?php esc_html_e( 'Not needed for a group (e.g. Cats). Deals inside a group get a label.', 'sts-sale-deals' ); ?></p>
+		</div>
 		<div class="sts-sd-badge-fields">
 		<div class="sts-sd-field">
 			<label for="sts_label_text"><?php esc_html_e( 'Label text', 'sts-sale-deals' ); ?></label>
@@ -218,7 +224,8 @@ class STS_Sale_Deals_Admin {
 
 	private function defaults() {
 		return array(
-			'text_raw' => '',
+			'text_raw'   => '',
+			'show_label' => false,
 			'bg'       => '#2a8c8d',
 			'color'    => '#ffffff',
 			'icon'     => true,
@@ -233,6 +240,8 @@ class STS_Sale_Deals_Admin {
 	public function render_edit_fields( $term ) {
 		$s             = STS_Sale_Deals::get_term_settings( $term );
 		$s['text_raw'] = (string) get_term_meta( $term->term_id, 'sts_label_text', true );
+		// Shown by default for a deal inside a group, or when a top-level deal already has its own label.
+		$s['show_label'] = $term->parent || '' !== $s['text_raw'] || $s['image'];
 		echo '<tr class="form-field"><th>' . esc_html__( 'Label design', 'sts-sale-deals' ) . '</th><td>';
 		$this->fields( $s );
 		echo '</td></tr>';

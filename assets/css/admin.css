@@ -5,5 +5,4 @@
 .sts-sd-kind--warn { background: #fcf0d9; color: #8a5a00; }
 .sts-sd-muted { color: #8c8f94; }
 .sts-sd-pill { display: inline-block; padding: 2px 12px; border-radius: 12px; font-size: 12px; font-weight: 600; }
-.sts-sd-group-note { display: none; margin: 8px 0; }
 .column-sts_kind, .column-sts_parent, .column-sts_label, .column-sts_products { width: 14%; }

@@ -139,6 +139,9 @@ msgstr "ללא (זו קבוצה, למשל חתולים)"
 msgid "Leave empty to create a group (e.g. Cats). Choose a group to create a deal inside it."
 msgstr "בלי הורה נוצרת קבוצה (למשל חתולים). בחרו קבוצה כדי ליצור מבצע בתוכה."
 
-msgid "A group has no label on products. To design a label, choose a group above and create a deal inside it."
-msgstr "לקבוצה אין תווית על מוצרים. כדי לעצב תווית, בחרו קבוצה למעלה וצרו מבצע בתוכה."
+msgid "Design a label for this deal"
+msgstr "עיצוב תווית למבצע הזה"
+
+msgid "Not needed for a group (e.g. Cats). Deals inside a group get a label."
+msgstr "לא נדרש לקבוצה (למשל חתולים). מבצעים בתוך קבוצה מקבלים תווית."
 
