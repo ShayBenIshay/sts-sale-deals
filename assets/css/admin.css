@@ -1,0 +1,8 @@
+/* Sale Deals admin screens */
+.sts-sd-kind { display: inline-block; padding: 1px 10px; border-radius: 10px; font-size: 12px; font-weight: 600; }
+.sts-sd-kind--group { background: #1d2327; color: #fff; }
+.sts-sd-kind--deal { background: #e7f5ee; color: #0a6b3d; }
+.sts-sd-kind--warn { background: #fcf0d9; color: #8a5a00; }
+.sts-sd-muted { color: #8c8f94; }
+.sts-sd-pill { display: inline-block; padding: 2px 12px; border-radius: 12px; font-size: 12px; font-weight: 600; }
+.column-sts_kind, .column-sts_parent, .column-sts_label, .column-sts_products { width: 14%; }

@@ -17,7 +17,7 @@ $current = $is_deal ? get_queried_object() : null;
 <div class="sts-deals-wrap">
 	<h1 class="sts-deals-title"><?php echo esc_html( STS_Sale_Deals_Pages::page_title() ); ?></h1>
 
-	<?php $chips = STS_Sale_Deals_Pages::get_chip_terms(); ?>
+	<?php $chips = $is_deal ? array() : STS_Sale_Deals_Pages::get_chip_terms(); ?>
 	<?php if ( $chips || $is_deal ) : ?>
 		<nav class="sts-deals-chips" aria-label="<?php echo esc_attr__( 'Sale deals', 'sts-sale-deals' ); ?>">
 			<?php if ( $is_deal ) : ?>

@@ -2,6 +2,29 @@
 	$( function () {
 		$( '.sts-sd-color' ).wpColorPicker();
 
+		// "Design a label" checkbox: off by default for a group (no parent), on for a deal inside one.
+		// Choosing a parent ticks it, choosing none clears it; either way it can be changed by hand.
+		// Hidden fields still submit, so saved label settings are never lost.
+		var $parent = $( '#parent' );
+		var $toggle = $( '#sts_label_toggle' );
+		function hasParent() {
+			var v = String( $parent.val() );
+			return $parent.length && v !== '-1' && v !== '0';
+		}
+		function applyLabelFields() {
+			$( '.sts-sd-badge-fields' ).toggle( $toggle.is( ':checked' ) );
+		}
+		function syncGroupFields() {
+			$toggle.prop( 'checked', hasParent() );
+			applyLabelFields();
+		}
+		$toggle.on( 'change', applyLabelFields );
+		applyLabelFields();
+		if ( window.stsSaleDeals && stsSaleDeals.parentHint ) {
+			$( '#parent-description' ).text( stsSaleDeals.parentHint );
+		}
+		$parent.on( 'change', syncGroupFields );
+
 		var frame;
 		$( '#sts_label_image_pick' ).on( 'click', function ( e ) {
 			e.preventDefault();
@@ -29,6 +52,7 @@
 				$( '#sts_label_text' ).val( '' );
 				$( '#sts_label_image' ).val( '' );
 				$( '#sts_label_image_preview' ).hide().attr( 'src', '' );
+				syncGroupFields();
 			}
 		} );
 	} );

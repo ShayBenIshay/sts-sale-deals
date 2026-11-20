@@ -138,13 +138,18 @@ class STS_Sale_Deals_Pages {
 
 	/**
 	 * Deals that currently have at least one product (empty deals get no chip).
+	 * Top-level deals (groups such as Cats, or ungrouped deals) by default; pass a
+	 * group's term id to get the deals directly under it. A group counts as
+	 * non-empty when any of its deals has products.
 	 *
+	 * @param int $parent Parent term id, 0 for the top level.
 	 * @return WP_Term[]
 	 */
-	public static function get_chip_terms() {
+	public static function get_chip_terms( $parent = 0 ) {
 		$terms = get_terms( array(
 			'taxonomy'   => STS_Sale_Deals::TAXONOMY,
 			'hide_empty' => true,
+			'parent'     => (int) $parent,
 			'orderby'    => 'name',
 			'order'      => 'ASC',
 		) );
@@ -167,6 +172,6 @@ function sts_sale_deals_display_name( $term ) {
 	return STS_Sale_Deals::get_display_name( $term );
 }
 
-function sts_sale_deals_chip_terms() {
-	return STS_Sale_Deals_Pages::get_chip_terms();
+function sts_sale_deals_chip_terms( $parent = 0 ) {
+	return STS_Sale_Deals_Pages::get_chip_terms( $parent );
 }
