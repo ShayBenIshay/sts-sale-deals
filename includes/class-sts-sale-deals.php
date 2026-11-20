@@ -120,10 +120,18 @@ class STS_Sale_Deals {
 			return null;
 		}
 		$id    = $product->is_type( 'variation' ) ? $product->get_parent_id() : $product->get_id();
-		$terms = wp_get_object_terms( $id, self::TAXONOMY, array( 'orderby' => 'term_id', 'order' => 'ASC' ) );
+		// get_the_terms() reads the term cache that WP_Query already primes for a product list,
+		// whereas wp_get_object_terms() ran one database query per product card.
+		$terms = get_the_terms( $id, self::TAXONOMY );
 		if ( is_wp_error( $terms ) || empty( $terms ) ) {
 			return null;
 		}
+		usort(
+			$terms,
+			function ( $a, $b ) {
+				return $a->term_id <=> $b->term_id;
+			}
+		);
 		return $terms[0];
 	}
 
