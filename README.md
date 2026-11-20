@@ -3,7 +3,7 @@
 Sale deals as a WooCommerce product taxonomy (`sts_deal`), with a label design per deal shown on products, a `/sales` page listing every deal product, and a page per deal at `/sales/<deal-slug>`.
 
 ## How it works
-- **One deal = one term** under Products > Sale Deals. The term holds the label: text, colour, text colour, optional tag icon, or an uploaded image badge.
+- **One deal = one term** under WooCommerce > Sale Deals (listed right after Discount Rules when that plugin is active). The term holds the label: text, colour, text colour, optional tag icon, or an uploaded image badge.
 - Assign products to a deal from the product edit screen, Quick Edit or Bulk Edit.
 - The same deal appears in Discount Rules PRO's filter dropdown (Custom Taxonomy > Sale Deals), so one selection drives both the discount and the label.
 - The label shows on the single product page (gallery) and on the shop loop. If a product is in several deals, the oldest deal wins.

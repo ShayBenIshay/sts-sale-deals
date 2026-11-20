@@ -26,7 +26,56 @@ class STS_Sale_Deals_Admin {
 		add_action( "edited_{$tax}", array( $this, 'save_fields' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue' ) );
 		add_action( 'admin_menu', array( $this, 'add_tool_page' ) );
+		add_action( 'admin_menu', array( $this, 'add_woocommerce_menu' ), 999 );
+		add_filter( 'parent_file', array( $this, 'menu_parent_file' ) );
+		add_filter( 'submenu_file', array( $this, 'menu_submenu_file' ) );
 		add_action( 'admin_post_sts_sd_convert', array( $this, 'handle_convert' ) );
+	}
+
+	/**
+	 * Deals live under WooCommerce, right after Discount Rules when that plugin is active
+	 * (otherwise at the end of the WooCommerce submenu).
+	 */
+	public function add_woocommerce_menu() {
+		global $submenu;
+		$tax = get_taxonomy( STS_Sale_Deals::TAXONOMY );
+		if ( ! $tax || empty( $submenu['woocommerce'] ) ) {
+			return;
+		}
+		$slug = $this->deals_menu_slug();
+		$item = array( $tax->labels->menu_name, $tax->cap->manage_terms, $slug );
+
+		$position = count( $submenu['woocommerce'] );
+		foreach ( $submenu['woocommerce'] as $i => $existing ) {
+			if ( isset( $existing[2] ) && false !== stripos( (string) $existing[2], 'discount' ) ) {
+				$position = $i + 1;
+				break;
+			}
+		}
+		array_splice( $submenu['woocommerce'], $position, 0, array( $item ) );
+	}
+
+	private function deals_menu_slug() {
+		return 'edit-tags.php?taxonomy=' . STS_Sale_Deals::TAXONOMY . '&post_type=product';
+	}
+
+	/**
+	 * Keep the WooCommerce menu open and our item highlighted on the deal screens.
+	 */
+	public function menu_parent_file( $parent_file ) {
+		$screen = get_current_screen();
+		if ( $screen && STS_Sale_Deals::TAXONOMY === $screen->taxonomy ) {
+			return 'woocommerce';
+		}
+		return $parent_file;
+	}
+
+	public function menu_submenu_file( $submenu_file ) {
+		$screen = get_current_screen();
+		if ( $screen && STS_Sale_Deals::TAXONOMY === $screen->taxonomy ) {
+			return $this->deals_menu_slug();
+		}
+		return $submenu_file;
 	}
 
 	public function enqueue( $hook ) {
@@ -130,7 +179,7 @@ class STS_Sale_Deals_Admin {
 				<div class="notice notice-success"><p>
 					<?php
 					/* translators: %d: number of deals */
-					echo esc_html( sprintf( __( '%d deal(s) created or updated. Edit them under Products > Sale Deals.', 'sts-sale-deals' ), absint( $_GET['converted'] ) ) );
+					echo esc_html( sprintf( __( '%d deal(s) created or updated. Edit them under WooCommerce > Sale Deals.', 'sts-sale-deals' ), absint( $_GET['converted'] ) ) );
 					?>
 				</p></div>
 			<?php endif; ?>

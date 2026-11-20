@@ -73,8 +73,8 @@ msgstr "תגיות למבצעים"
 msgid "Convert product tags to deals"
 msgstr "המרת תגיות מוצרים למבצעים"
 
-msgid "%d deal(s) created or updated. Edit them under Products > Sale Deals."
-msgstr "נוצרו או עודכנו %d מבצעים. אפשר לערוך אותם תחת מוצרים ← מבצעים."
+msgid "%d deal(s) created or updated. Edit them under WooCommerce > Sale Deals."
+msgstr "נוצרו או עודכנו %d מבצעים. אפשר לערוך אותם תחת ווקומרס ← מבצעים."
 
 msgid "Tick the tags that are sale deals. Each becomes a deal with the same slug, and every product with the tag is added to it. The tags are left untouched. You can edit the label afterwards."
 msgstr "מסמנים את התגיות שהן מבצעים. כל תגית הופכת למבצע עם אותו מזהה, וכל מוצר עם התגית מתווסף אליו. התגיות עצמן לא משתנות. את התווית אפשר לערוך אחר כך."

@@ -63,7 +63,7 @@ class STS_Sale_Deals {
 				'public'             => true,
 				'publicly_queryable' => true,
 				'show_ui'            => true,
-				'show_in_menu'       => true,
+				'show_in_menu'       => false, // listed under WooCommerce instead, see STS_Sale_Deals_Admin::add_woocommerce_menu().
 				'show_in_nav_menus'  => true,
 				'show_admin_column'  => true,
 				'show_in_quick_edit' => true,
