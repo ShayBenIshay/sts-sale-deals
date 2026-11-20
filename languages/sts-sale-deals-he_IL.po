@@ -109,3 +109,36 @@ msgstr "כל המבצעים"
 msgid "There are no products in this deal right now."
 msgstr "אין כרגע מוצרים במבצע הזה."
 
+msgid "Name"
+msgstr "שם"
+
+msgid "Type"
+msgstr "סוג"
+
+msgid "Group"
+msgstr "קבוצה"
+
+msgid "Label on product"
+msgstr "תווית על המוצר"
+
+msgid "Deal"
+msgstr "מבצע"
+
+msgid "Deal without a group"
+msgstr "מבצע ללא קבוצה"
+
+msgid "This deal has products but no group. Set a parent so it shows under a group."
+msgstr "למבצע הזה יש מוצרים אבל אין לו קבוצה. בחרו הורה כדי שיופיע תחת קבוצה."
+
+msgid "%d deals"
+msgstr "%d מבצעים"
+
+msgid "None (this is a group, e.g. Cats)"
+msgstr "ללא (זו קבוצה, למשל חתולים)"
+
+msgid "Leave empty to create a group (e.g. Cats). Choose a group to create a deal inside it."
+msgstr "בלי הורה נוצרת קבוצה (למשל חתולים). בחרו קבוצה כדי ליצור מבצע בתוכה."
+
+msgid "A group has no label on products. To design a label, choose a group above and create a deal inside it."
+msgstr "לקבוצה אין תווית על מוצרים. כדי לעצב תווית, בחרו קבוצה למעלה וצרו מבצע בתוכה."
+

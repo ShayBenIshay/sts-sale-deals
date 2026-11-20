@@ -2,6 +2,20 @@
 	$( function () {
 		$( '.sts-sd-color' ).wpColorPicker();
 
+		// No parent = a group, which carries no label: hide the label design fields (their values stay in the form).
+		var $parent = $( '#parent' );
+		function syncGroupFields() {
+			var v = String( $parent.val() );
+			var isGroup = ! $parent.length || v === '-1' || v === '0';
+			$( '.sts-sd-badge-fields' ).toggle( ! isGroup );
+			$( '.sts-sd-group-note' ).toggle( isGroup );
+		}
+		if ( window.stsSaleDeals && stsSaleDeals.parentHint ) {
+			$( '#parent-description' ).text( stsSaleDeals.parentHint );
+		}
+		$parent.on( 'change', syncGroupFields );
+		syncGroupFields();
+
 		var frame;
 		$( '#sts_label_image_pick' ).on( 'click', function ( e ) {
 			e.preventDefault();
@@ -29,6 +43,7 @@
 				$( '#sts_label_text' ).val( '' );
 				$( '#sts_label_image' ).val( '' );
 				$( '#sts_label_image_preview' ).hide().attr( 'src', '' );
+				syncGroupFields();
 			}
 		} );
 	} );
